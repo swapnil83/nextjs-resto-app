@@ -1,4 +1,4 @@
-const RestaurantFooter = () => {
+const Footer = () => {
     return(
         <div className="footer-wrapper">
             <p>All Rights Reserved by Resto Food Delivery</p>
@@ -6,4 +6,4 @@ const RestaurantFooter = () => {
     )
 };
 
-export default RestaurantFooter;
+export default Footer;
