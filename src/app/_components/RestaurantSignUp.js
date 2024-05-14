@@ -36,7 +36,6 @@ const RestaurantSignUp = () => {
         });
         response = await response.json();
         if(response.success) {
-            alert('Restaurant Registered Successfully!!');
             const { result } = response;
             delete result.password;
             localStorage.setItem('restaurantUser', JSON.stringify(result));
@@ -48,6 +47,7 @@ const RestaurantSignUp = () => {
             setAddress('');
             setCity('');
             setContact('');
+            alert('Restaurant Registered Successfully!!');
         } else {
             alert('Not registered please try again!');
         }
