@@ -1,14 +1,37 @@
-import { useState } from "react";
+'use client';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import './../../style.css';
 
-const AddFoodItem = ( props ) => {
+const EditFoodItem = ( props ) => {
+    const itemId = props.params.id;
     const [ name, setName ] = useState('');
     const [ price, setPrice ] = useState('');
     const [ path, setPath ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ error, setError ] = useState( false );
+    const router = useRouter();
 
-    const handleAddFoodItem = async () => {
+    useEffect(() => {
+        fetchFoodItem();
+    }, []);
 
+    const fetchFoodItem = async () => {
+        let response = await fetch('http://localhost:3000/api/restaurant/foods/edit/'+itemId);
+        response = await response.json();
+
+        if(response.success) {
+            setName(response.result.name);
+            setPrice(response.result.price);
+            setDescription(response.result.description);
+            setPath(response.result.img_path);
+        } else {
+            alert('Something is wrong, please try after some time!');
+        }
+    };
+
+    const handleEditFoodItem = async () => {
+        
         if(!name || !price || !path || !description) {
             setError( true );
             return false;
@@ -16,33 +39,22 @@ const AddFoodItem = ( props ) => {
             setError(true);
         }
 
-        const restaurantData = JSON.parse(localStorage.getItem('restaurantUser'));
-        let resto_id;
-        if(restaurantData) {
-            resto_id = restaurantData._id;
-        }
-        let response = await fetch('http://localhost:3000/api/restaurant/foods', {
-            method: 'POST',
-            body: JSON.stringify({name, price, img_path: path, description, resto_id })
-        } );
+        let response = await fetch('http://localhost:3000/api/restaurant/foods/edit/'+itemId, {
+            method: 'PUT',
+            body: JSON.stringify({ name, price, img_path: path, description })
+        });
         response = await response.json();
 
         if(response.success) {
-            alert('Food Item added!!');
-            setName('');
-            setPrice('');
-            setPath('');
-            setDescription('');
-            setError(false);
-            props.setAddFoodItem(false);
+            router.push('../dashboard')
         } else {
-            alert('Please try to add food item!');
+            alert('Item is not updated, please try again after some time!')
         }
-    }
+    };
 
     return(
         <div className="container">
-            <h3>Add New Food Item</h3>
+            <h3>Update Food Item</h3>
             <div className="input-wrapper">
                 <input 
                     className="input-field"
@@ -96,10 +108,13 @@ const AddFoodItem = ( props ) => {
                 }
             </div>
             <div className="input-wrapper">
-                <button className="button" onClick={handleAddFoodItem}>Add Food Item</button>
+                <button className="button" onClick={handleEditFoodItem}>Update Food Item</button>
+            </div>
+            <div className="input-wrapper">
+                <button className="button" onClick={() => router.push('../dashboard')}>Back to Food Item List</button>
             </div>
         </div>
     )
 };
 
-export default AddFoodItem;
+export default EditFoodItem;

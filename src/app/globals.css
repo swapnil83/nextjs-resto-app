@@ -28,3 +28,18 @@
 .button-link:hover {
     color: blueviolet;
 }
+
+table, tr, td {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+table td button {
+    margin: 5px;
+}
+
+table img {
+    width: 80px;
+    height: 80px;
+}
