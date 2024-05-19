@@ -1,3 +1,59 @@
+*:focus {
+    outline: none;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-wrapper ul {
+    display: flex;
+}
+
+.header-wrapper ul li {
+    list-style-type: none;
+    padding: 5px;
+}
+
+.header-wrapper ul li a {
+    text-decoration: none;
+    color: blue;
+}
+
+.header-wrapper ul li a:hover {
+    color: blueviolet;
+}
+
+.header-wrapper ul li button {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.header-wrapper ul li button:hover {
+    color: blueviolet;
+}
+
+.footer-wrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    background-color: white;
+}
+
+.input-error {
+    font-size: 12px;
+    color: red;
+    position: absolute;
+}
+
 .input-wrapper {
     margin: 10px;
 }
@@ -43,3 +99,61 @@ table img {
     width: 80px;
     height: 80px;
 }
+
+.main-page-banner {
+    background-image: url('https://a.storyblok.com/f/88809/1150x450/30a9c4f9a6/igevia_header_fastfood01_450.jpg');
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: multiply;
+    padding: 30px;
+    height: 230px;
+    color: #fff;
+    text-align: center;
+}
+
+.input-wrapper {
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: auto;
+    width: 60%;
+}
+
+.select-input {
+    height: 40px;
+    border: none;
+    width: 25%;
+    padding-left: 15px;
+}
+
+.search-input {
+    height: 40px;
+    border: none;
+    width: 45%;
+    border-left: 1px solid #ccc;
+    padding-left: 15px;
+}
+
+.location-list {
+    color: #000;
+    list-style-type: none;
+    text-align: left;
+    position: absolute;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    margin-left: -5px;
+    border: 1px solid #ccc;
+}
+
+.location-list li {
+    width: 180px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.location-list li:hover {
+    background-color: #ccc;
+}
+
