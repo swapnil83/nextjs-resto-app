@@ -47,7 +47,7 @@ export default function Home() {
         setSelectedLocation(location);
         setShowLocationList(false);
         fetchRestaurants({ location })
-    }
+    };
 
     return (
         <main>
