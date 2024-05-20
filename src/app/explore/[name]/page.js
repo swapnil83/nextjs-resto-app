@@ -8,6 +8,9 @@ const RestaurantDetails = (props) => {
     const [ restaurantDetails, setRestaurantDetails ] = useState( {} );
     const [ foodItems, setFoodItems ] = useState( [] );
     const [ cartData, setCartData ] = useState();
+    const [ cartStorage, setCartStorage ] = useState(JSON.parse(localStorage.getItem('cart')));
+    const [ cartIds, setCartIds ] = useState(cartStorage ? () => cartStorage.map(item => item._id) : []);
+    const [ removeCartItemId, setRemoveCartItemId ] = useState();
 
     useEffect(() => {
         fetchRestaurantDetails();
@@ -27,12 +30,23 @@ const RestaurantDetails = (props) => {
     };
 
     const addToCart = ( item ) => {
+        let localCartIds = cartIds;
+        localCartIds.push(item._id);
+        setCartIds(localCartIds);
         setCartData( item );
+        setRemoveCartItemId();
+    };
+
+    const removeFromCart = ( itemId ) => {
+        setRemoveCartItemId(itemId);
+        let localCartIds = cartIds.filter(item => item !== itemId );
+        setCartData();
+        setCartIds(localCartIds);
     };
 
     return (
         <div>
-            <CustomerHeader cartData={cartData} />
+            <CustomerHeader cartData={cartData} removeCartItemId={removeCartItemId} />
             <div className="restaurant-page-banner">
                 <h1>{decodeURI(name)}</h1>
             </div>
@@ -53,7 +67,12 @@ const RestaurantDetails = (props) => {
                                 <div>{item.name}</div>
                                 <div>{item.price}</div>
                                 <div className="description">{item.description}</div>
-                                <button onClick={() => addToCart(item)}>Add to Cart</button>
+                                {
+                                    cartIds.includes(item._id) ?
+                                    <button onClick={() => removeFromCart(item._id)}>Remove from Cart</button>
+                                    :
+                                    <button onClick={() => addToCart(item)}>Add to Cart</button>
+                                }
                             </div>
                         </div>
                     )) :

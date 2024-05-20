@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const CustomerHeader = ( props ) => {
-
     const cartStorage = JSON.parse(localStorage.getItem('cart'));
     const [ cartNumber, setCartNumber ] = useState( cartStorage?.length || 0 );
     const [ cartItems, setCartItems ] = useState( cartStorage );
@@ -18,8 +17,8 @@ const CustomerHeader = ( props ) => {
                     localStorage.setItem('cart', JSON.stringify([props.cartData]));
                 } else {
                     let localCartItem = cartItems;
-                    localCartItem.push(JSON.parse(JSON.stringify(localCartItem)));
-                    setCartNumber(localCartItem.length);
+                    localCartItem.push(JSON.parse(JSON.stringify(props.cartData)));
+                    setCartNumber(cartNumber + 1);
                     setCartItems(localCartItem);
                     localStorage.setItem('cart', JSON.stringify(localCartItem));
                 }
@@ -30,6 +29,18 @@ const CustomerHeader = ( props ) => {
             }
         }
     }, [ props.cartData ]);
+
+    useEffect(() => {
+        if(props.removeCartItemId) {
+            let localCartItems = cartItems.filter(item => item._id !== props.removeCartItemId );
+            setCartNumber(cartNumber - 1);
+            setCartItems(localCartItems);
+            localStorage.setItem('cart', JSON.stringify(localCartItems));
+            if(localCartItems.length === 0) {
+                localStorage.removeItem('cart');
+            }
+        }
+    }, [ props.removeCartItemId ]);
 
     return(
         <div className="header-wrapper">
