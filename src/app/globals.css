@@ -100,7 +100,7 @@ table img {
     height: 80px;
 }
 
-.main-page-banner {
+.main-page-banner, .restaurant-page-banner {
     background-image: url('https://a.storyblok.com/f/88809/1150x450/30a9c4f9a6/igevia_header_fastfood01_450.jpg');
     background-color: rgba(0, 0, 0, 0.6);
     background-blend-mode: multiply;
@@ -157,3 +157,78 @@ table img {
     background-color: #ccc;
 }
 
+.restaurant-list-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.restaurant-wrapper {
+    width: 45%;
+    background-color: orange;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.restaurant-wrapper .heading-wrapper, .restaurant-wrapper .address-wrapper {
+    padding-left: 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.restaurant-wrapper h5 {
+    margin-left: 15px;
+}
+
+.restaurant-wrapper .address {
+    margin-left: 5px;
+}
+
+.restaurant-page-banner h1 {
+    font-size: 65px;
+}
+
+.detail-wrapper {
+    display: flex;
+    background-color: orange;
+}
+
+.detail-wrapper h4 {
+    width: 50%;
+}
+
+.food-item-wrapper {
+    margin: 50px 0 50px;
+}
+
+.food-item-wrapper .list-item {
+    color: orange;
+    font-weight: bold;
+    border-bottom: 1px solid orange;
+    padding: 20px;
+    display: flex;
+    text-transform: capitalize;
+}
+
+.food-item-wrapper .list-item button {
+    color: white;
+    border: none;
+    background-color: orange;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.food-item-wrapper .list-item img {
+    width: 100px;
+    padding-right: 20px;
+}
+
+.food-item-wrapper .list-item .description {
+    font-weight: lighter;
+}
